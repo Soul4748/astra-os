@@ -1,36 +1,220 @@
-export interface DesktopIcon {
-  id: string;
-  label: string;
-  emoji: string;
-  top: number;
-  left: number;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTRA OS</title>
+    <style>
+        :root {
+            --accent: #a78bfa;
+            --glass: rgba(10, 10, 15, 0.7);
+            --border: rgba(255, 255, 255, 0.2);
+        }
 
-export interface WindowState {
-  id: string;
-  name: string;
-  isOpen: boolean;
-  isMinimized: boolean;
-  zIndex: number;
-  position: { x: number; y: number };
-  size: { width: number; height: number };
-}
+        @keyframes rgb-glow {
+            0% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+            33% { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+            66% { border-color: #0000ff; box-shadow: 0 0 15px #0000ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+        }
+        .rgb-active .window, .rgb-active #taskbar { 
+            animation: rgb-glow 3s linear infinite !important; 
+            border: 2px solid !important; 
+        }
 
-export interface Wallpaper {
-  id: string;
-  url: string;
-  thumb: string;
-  name: string;
-  category: string;
-}
+        * { box-sizing: border-box; transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s; }
 
-export interface SystemSettings {
-  wallpaper: string;
-  accentColor: string;
-  rgbMode: boolean;
-  blurIntensity: number;
-  transparency: number;
-  showClock: boolean;
-  fontSize: number;
-  animationsEnabled: boolean;
-}
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            background: #000 url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=3840&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Inter', -apple-system, sans-serif;
+            overflow: hidden;
+        }
+
+        #boot-loader {
+            position: fixed; inset: 0; background: #000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 100000;
+        }
+        .loader-ring { width: 50px; height: 50px; border: 2px solid rgba(167, 139, 250, 0.1); border-top: 2px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        #desktop { position: absolute; inset: 0; padding: 40px; }
+        .icon { width: 90px; cursor: pointer; text-align: center; position: absolute; user-select: none; }
+        .icon-box { 
+            width: 64px; height: 64px; margin: 0 auto 10px;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(15px);
+            border-radius: 18px; border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center; font-size: 32px;
+            pointer-events: none; 
+        }
+        .icon:hover .icon-box { background: rgba(255,255,255,0.25); border-color: var(--accent); box-shadow: 0 0 20px rgba(167, 139, 250, 0.4); }
+        .icon-label { font-size: 11px; font-weight: 700; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5); pointer-events: none; }
+
+        .window {
+            position: absolute; background: var(--glass);
+            backdrop-filter: blur(50px) saturate(170%);
+            border: 1px solid var(--border); border-radius: 24px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            display: flex; flex-direction: column; overflow: hidden;
+            min-width: 300px; min-height: 200px;
+        }
+        .win-head { padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; cursor: move; background: rgba(255,255,255,0.05); }
+        .win-title { font-size: 12px; font-weight: 900; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; pointer-events: none; }
+        .win-btn { cursor: pointer; font-weight: bold; margin-left: 15px; opacity: 0.6; }
+        .win-btn:hover { opacity: 1; color: var(--accent); }
+
+        .browser-container { display: flex; flex-direction: column; height: 100%; background: #fff; margin: 0 12px 12px 12px; border-radius: 16px; overflow: hidden; }
+        .nexus-home { height: 100%; width: 100%; background: linear-gradient(135deg, #0f172a, #1e293b); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .home-logo { font-size: 60px; font-weight: 900; background: linear-gradient(to right, #a78bfa, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        .home-search { width: 70%; max-width: 500px; padding: 15px 25px; border-radius: 30px; border: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; font-size: 18px; outline: none; }
+
+        .settings-view { padding: 30px; }
+        .wall-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .wall-item { aspect-ratio: 16/9; border-radius: 12px; cursor: pointer; background-size: cover; background-position: center; border: 2px solid transparent; }
+
+        #taskbar {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            height: 64px; background: rgba(0,0,0,0.5); backdrop-filter: blur(25px);
+            border: 1px solid var(--border); border-radius: 22px;
+            display: flex; align-items: center; padding: 0 25px; gap: 20px; z-index: 10000;
+        }
+        .clock { font-family: monospace; font-size: 16px; font-weight: bold; color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<div id="boot-loader">
+    <div class="loader-ring"></div>
+    <div style="margin-top:20px; letter-spacing:5px; font-size:12px; color:var(--accent)">ASTRA OS // LOADING</div>
+</div>
+
+<div id="desktop">
+    <div class="icon" style="top:40px; left:40px;" ondblclick="launch('Network')">
+        <div class="icon-box">🌐</div><div class="icon-label">NETWORK</div>
+    </div>
+    <div class="icon" style="top:150px; left:40px;" ondblclick="launch('Settings')">
+        <div class="icon-box">⚙️</div><div class="icon-label">SYSTEM</div>
+    </div>
+    <div class="icon" style="top:260px; left:40px;" ondblclick="launch('Notes')">
+        <div class="icon-box">📝</div><div class="icon-label">NOTES</div>
+    </div>
+</div>
+
+<div id="taskbar">
+    <div style="font-weight:900; color:var(--accent); font-size:20px;">★</div>
+    <div id="dock-apps" style="display:flex; gap:15px;"></div>
+    <div class="clock" id="clock">00:00</div>
+</div>
+
+<script>
+    let z = 1000;
+
+    window.onload = () => {
+        setTimeout(() => {
+            document.getElementById('boot-loader').style.opacity = '0';
+            setTimeout(() => document.getElementById('boot-loader').style.display = 'none', 800);
+        }, 1500);
+    };
+
+    function launch(name) {
+        if(document.getElementById('win-'+name)) {
+            const w = document.getElementById('win-'+name);
+            w.style.display = 'flex';
+            w.style.zIndex = z++;
+            return;
+        }
+
+        const win = document.createElement('div');
+        win.className = 'window';
+        win.id = 'win-' + name;
+        win.style.width = name === 'Network' ? '900px' : '480px';
+        win.style.height = name === 'Network' ? '600px' : '420px';
+        win.style.left = '200px'; win.style.top = '100px';
+        win.style.zIndex = z++;
+
+        let content = '';
+        if(name === 'Network') {
+            content = `<div class="browser-container">
+                        <div class="nexus-home" id="home-${name}">
+                            <div class="home-logo">ASTRA</div>
+                            <input type="text" class="home-search" placeholder="Enter URL or Search..." onkeydown="if(event.key==='Enter') doSearch(this, '${name}')">
+                        </div>
+                        <iframe class="browser-iframe" id="frame-${name}" style="width:100%; height:100%; border:none; display:none;"></iframe>
+                      </div>`;
+        } else if(name === 'Settings') {
+            content = `<div class="settings-view">
+                        <div style="font-weight:900; letter-spacing:2px; color:var(--accent)">WALLPAPER GALLERY</div>
+                        <div class="wall-grid">
+                            <div class="wall-item" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=3840')" onclick="setW('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=3840')"></div>
+                            <div class="wall-item" style="background-image:url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=3840')" onclick="setW('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=3840')"></div>
+                            <div class="wall-item" style="background-image:url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=3840')" onclick="setW('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=3840')"></div>
+                        </div>
+                        <button onclick="document.body.classList.toggle('rgb-active')" style="margin-top:20px; width:100%; padding:12px; background:#111; color:white; border:1px solid var(--accent); border-radius:8px; cursor:pointer; font-weight:bold;">TOGGLE RGB MODE</button>
+                        <button onclick="location.reload()" style="margin-top:10px; width:100%; padding:12px; background:var(--accent); border:none; border-radius:8px; font-weight:bold; cursor:pointer; color:#000;">REBOOT OS</button>
+                    </div>`;
+        } else {
+            content = `<textarea style="width:100%; height:100%; background:transparent; border:none; color:#fff; padding:30px; outline:none; font-size:18px; resize:none; font-family:monospace;" placeholder="Write notes..."></textarea>`;
+        }
+
+        win.innerHTML = `<div class="win-head" onmousedown="startDrag(event, this.parentElement)"><div class="win-title">${name}</div><div class="win-ctrls"><span class="win-btn" onclick="document.getElementById('win-${name}').style.display='none'">—</span><span class="win-btn" onclick="document.getElementById('win-${name}').remove(); document.getElementById('tab-${name}').remove();">✕</span></div></div>${content}`;
+        document.body.appendChild(win);
+
+        const tab = document.createElement('div');
+        tab.id = 'tab-'+name;
+        tab.style = "cursor:pointer; font-size:22px;";
+        tab.innerText = name === 'Network' ? '🌐' : (name === 'Settings' ? '⚙️' : '📝');
+        tab.onclick = () => { win.style.display = 'flex'; win.style.zIndex = z++; };
+        document.getElementById('dock-apps').appendChild(tab);
+    }
+
+    function doSearch(input, id) {
+        let val = input.value;
+        const frame = document.getElementById('frame-'+id);
+        const home = document.getElementById('home-'+id);
+        
+        home.style.display = 'none';
+        frame.style.display = 'block';
+        
+        if (val.includes('.') && !val.includes(' ')) {
+            let url = val.startsWith('http') ? val : 'https://' + val;
+            frame.src = url;
+        } else {
+            frame.src = 'https://www.bing.com/search?q=' + encodeURIComponent(val) + '&igu=1';
+        }
+    }
+
+    function setW(imgUrl) { document.body.style.backgroundImage = "url('" + imgUrl + "')"; }
+
+    let draggedEl = null;
+    let offsetX = 0, offsetY = 0;
+
+    function startDrag(e, el) {
+        if (e.target.classList.contains('win-btn')) return;
+        draggedEl = el;
+        el.style.zIndex = z++;
+        offsetX = e.clientX - el.offsetLeft;
+        offsetY = e.clientY - el.offsetTop;
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('mouseup', stopDrag);
+    }
+
+    function onDrag(e) {
+        if (!draggedEl) return;
+        draggedEl.style.left = (e.clientX - offsetX) + 'px';
+        draggedEl.style.top = (e.clientY - offsetY) + 'px';
+    }
+
+    function stopDrag() {
+        draggedEl = null;
+        document.removeEventListener('mousemove', onDrag);
+        document.removeEventListener('mouseup', stopDrag);
+    }
+
+    setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }, 1000);
+</script>
+</body>
+</html>
