@@ -1,0 +1,36 @@
+export interface DesktopIcon {
+  id: string;
+  label: string;
+  emoji: string;
+  top: number;
+  left: number;
+}
+
+export interface WindowState {
+  id: string;
+  name: string;
+  isOpen: boolean;
+  isMinimized: boolean;
+  zIndex: number;
+  position: { x: number; y: number };
+  size: { width: number; height: number };
+}
+
+export interface Wallpaper {
+  id: string;
+  url: string;
+  thumb: string;
+  name: string;
+  category: string;
+}
+
+export interface SystemSettings {
+  wallpaper: string;
+  accentColor: string;
+  rgbMode: boolean;
+  blurIntensity: number;
+  transparency: number;
+  showClock: boolean;
+  fontSize: number;
+  animationsEnabled: boolean;
+}
