@@ -33,7 +33,6 @@
             overflow: hidden;
         }
 
-        /* BOOT LOADER */
         #boot-loader {
             position: fixed; inset: 0; background: #000;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -46,7 +45,6 @@
         .loader-bar { height: 100%; background: var(--accent); width: 0%; animation: load 2s ease-out forwards; }
         @keyframes load { to { width: 100%; } }
 
-        /* DESKTOP */
         #desktop { position: absolute; inset: 0; padding: 40px; }
         .icon { width: 90px; cursor: pointer; text-align: center; position: absolute; user-select: none; transition: transform 0.2s, opacity 0.3s; }
         .icon:hover { transform: scale(1.05); }
@@ -60,7 +58,6 @@
         .icon:hover .icon-box { background: rgba(255,255,255,0.25); border-color: var(--accent); box-shadow: 0 0 25px rgba(167, 139, 250, 0.5); }
         .icon-label { font-size: 11px; font-weight: 700; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
 
-        /* WINDOWS */
         .window {
             position: absolute; background: var(--glass);
             backdrop-filter: blur(50px) saturate(170%);
@@ -77,22 +74,18 @@
         .win-btn { cursor: pointer; font-size: 14px; opacity: 0.6; transition: all 0.2s; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
         .win-btn:hover { opacity: 1; color: var(--accent); background: rgba(255,255,255,0.1); }
         .win-btn.close:hover { background: #ef4444; color: white; opacity: 1; }
-
-        /* APPS */
         .app-content { flex: 1; overflow: auto; }
 
-        /* Network App */
         .browser-container { display: flex; flex-direction: column; height: 100%; background: #0f172a; margin: 10px; border-radius: 12px; overflow: hidden; }
         .browser-toolbar { padding: 10px; background: rgba(0,0,0,0.3); display: flex; gap: 10px; align-items: center; }
         .browser-input { flex: 1; padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: white; font-size: 13px; outline: none; }
         .browser-input:focus { border-color: var(--accent); }
         .nexus-home { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .home-logo { font-size: 48px; font-weight: 900; background: linear-gradient(135deg, #a78bfa, #7c3aed, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
-        .home-search { width: 70%; max-width: 450px; padding: 14px 24px; border-radius: 30px; border: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; font-size: 16px; outline: none; transition: all 0.2s; }
+        .home-logo { font-size: 48px; font-weight: 900; background: linear-gradient(135deg, #a78bfa, #7c3aed, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .home-search { width: 70%; max-width: 450px; padding: 14px 24px; border-radius: 30px; border: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; font-size: 16px; outline: none; transition: all 0.2s; margin-top: 20px; }
         .home-search:focus { border-color: var(--accent); box-shadow: 0 0 20px rgba(167, 139, 250, 0.3); }
         .browser-iframe { flex: 1; border: none; background: white; }
 
-        /* Settings App */
         .settings-view { padding: 24px; }
         .settings-section { margin-bottom: 28px; }
         .settings-title { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
@@ -111,25 +104,21 @@
         .toggle-switch::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: all 0.2s; }
         .toggle-switch.active::after { left: 23px; }
 
-        /* Notes App */
         .notes-area { width: 100%; height: 100%; background: transparent; border: none; color: #fff; padding: 20px; outline: none; font-size: 14px; resize: none; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
         .notes-area::placeholder { color: rgba(255,255,255,0.3); }
 
-        /* Terminal App */
         .terminal { width: 100%; height: 100%; background: #0a0a0a; padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; overflow: auto; }
         .terminal-line { margin-bottom: 8px; line-height: 1.5; }
         .terminal-prompt { color: var(--accent); }
         .terminal-input { background: transparent; border: none; color: #fff; font-family: inherit; font-size: inherit; outline: none; width: calc(100% - 100px); }
         .terminal-output { color: rgba(255,255,255,0.7); }
 
-        /* Files App */
         .files-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px; }
         .file-item { text-align: center; padding: 16px; border-radius: 12px; cursor: pointer; transition: all 0.2s; }
         .file-item:hover { background: rgba(255,255,255,0.1); }
         .file-icon { font-size: 36px; margin-bottom: 8px; }
         .file-name { font-size: 11px; color: rgba(255,255,255,0.8); }
 
-        /* Calculator App */
         .calc-display { background: rgba(0,0,0,0.3); padding: 20px; text-align: right; font-size: 32px; font-weight: 300; border-bottom: 1px solid var(--border); }
         .calc-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
         .calc-btn { padding: 20px; background: rgba(255,255,255,0.05); border: none; color: white; font-size: 18px; cursor: pointer; transition: all 0.1s; }
@@ -139,7 +128,6 @@
         .calc-btn.eq { background: var(--accent); color: #000; }
         .calc-btn.eq:hover { filter: brightness(1.1); }
 
-        /* TASKBAR */
         #taskbar {
             position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
             height: 56px; background: rgba(0,0,0,0.6); backdrop-filter: blur(30px);
@@ -199,7 +187,6 @@
     let calcDisplay = '0';
     let calcHistory = '';
 
-    // Boot sequence
     window.onload = () => {
         setTimeout(() => {
             document.getElementById('boot-loader').style.opacity = '0';
@@ -236,19 +223,9 @@
         win.style.zIndex = z++;
 
         const content = getAppContent(name);
-        win.innerHTML = `
-            <div class="win-head" onmousedown="startDrag(event, this.parentElement)">
-                <div class="win-title">${name}</div>
-                <div class="win-ctrls">
-                    <span class="win-btn" onclick="minimizeWin('${name}')">—</span>
-                    <span class="win-btn close" onclick="closeWin('${name}')">✕</span>
-                </div>
-            </div>
-            <div class="app-content">${content}</div>
-        `;
+        win.innerHTML = '<div class="win-head" onmousedown="startDrag(event, this.parentElement)"><div class="win-title">'+name+'</div><div class="win-ctrls"><span class="win-btn" onclick="minimizeWin(\''+name+'\')">—</span><span class="win-btn close" onclick="closeWin(\''+name+'\')">✕</span></div></div><div class="app-content">'+content+'</div>';
         document.body.appendChild(win);
 
-        // Add to dock
         const tab = document.createElement('div');
         tab.id = 'tab-'+name;
         tab.className = 'dock-item active';
@@ -264,99 +241,21 @@
 
     function getAppContent(name) {
         if(name === 'Network') {
-            return `
-                <div class="browser-container">
-                    <div class="browser-toolbar">
-                        <button onclick="goBack('${name}')" style="background:none; border:none; color:white; cursor:pointer; padding:5px;">←</button>
-                        <button onclick="goHome('${name}')" style="background:none; border:none; color:white; cursor:pointer; padding:5px;">⌂</button>
-                        <input type="text" class="browser-input" id="url-${name}" placeholder="Enter URL or search..." onkeydown="if(event.key==='Enter')navigate('${name}')">
-                    </div>
-                    <div class="nexus-home" id="home-${name}">
-                        <div class="home-logo">ASTRA</div>
-                        <input type="text" class="home-search" placeholder="Search the web..." onkeydown="if(event.key==='Enter')searchWeb(this.value,'${name}')">
-                    </div>
-                    <iframe class="browser-iframe" id="frame-${name}" style="display:none;"></iframe>
-                </div>`;
+            return '<div class="browser-container"><div class="browser-toolbar"><button onclick="goBack(\'Network\')" style="background:none; border:none; color:white; cursor:pointer; padding:5px;">←</button><button onclick="goHome(\'Network\')" style="background:none; border:none; color:white; cursor:pointer; padding:5px;">⌂</button><input type="text" class="browser-input" id="url-Network" placeholder="Enter URL or search..." onkeydown="if(event.key===\'Enter\')navigate(\'Network\')"></div><div class="nexus-home" id="home-Network"><div class="home-logo">ASTRA</div><input type="text" class="home-search" placeholder="Search the web..." onkeydown="if(event.key===\'Enter\')searchWeb(this.value,\'Network\')"></div><iframe class="browser-iframe" id="frame-Network" style="display:none;"></iframe></div>';
         } else if(name === 'Settings') {
-            return `
-                <div class="settings-view">
-                    <div class="settings-section">
-                        <div class="settings-title">Wallpaper Gallery</div>
-                        <div class="wall-grid">
-                            <div class="wall-item ${currentWallpaper.includes('1451187580459') ? 'active' : ''}" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800')" onclick="setWallpaper(this, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=3840')"></div>
-                            <div class="wall-item ${currentWallpaper.includes('1618005182384') ? 'active' : ''}" style="background-image:url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800')" onclick="setWallpaper(this, 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=3840')"></div>
-                            <div class="wall-item ${currentWallpaper.includes('1477346611705') ? 'active' : ''}" style="background-image:url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=800')" onclick="setWallpaper(this, 'https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=3840')"></div>
-                            <div class="wall-item" style="background-image:url('https://images.unsplash.com/photo-1462331940025-496de9e46e46?q=80&w=800')" onclick="setWallpaper(this, 'https://images.unsplash.com/photo-1462331940025-496dee46e46?q=80&w=3840')"></div>
-                            <div class="wall-item" style="background-image:url('https://images.unsplash.com/photo-1464802680160-9c7f5d5a4a64?q=80&w=800')" onclick="setWallpaper(this, 'https://images.unsplash.com/photo-1464802680160-9c7f5d5a4a64?q=80&w=3840')"></div>
-                            <div class="wall-item" style="background-image:url('https://images.unsplash.com/photo-1506318137071-a8e0661ad6d8?q=80&w=800')" onclick="setWallpaper(this, 'https://images.unsplash.com/photo-1506318137071-a8e0661ad6e6ad6d8?q=80&w=3840')"></div>
-                        </div>
-                    </div>
-                    <div class="settings-section">
-                        <div class="settings-title">System</div>
-                        <div class="settings-row">
-                            <span class="settings-label">RGB Mode</span>
-                            <div class="toggle-switch" id="rgb-toggle" onclick="toggleRGB(this)"></div>
-                        </div>
-                        <div class="settings-row">
-                            <span class="settings-label">Animations</span>
-                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                    </div>
-                    <button class="settings-btn primary" onclick="location.reload()">Reboot System</button>
-                </div>`;
+            return '<div class="settings-view"><div class="settings-section"><div class="settings-title">Wallpaper Gallery</div><div class="wall-grid"><div class="wall-item" style="background-image:url(\'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800\')" onclick="setWallpaper(this, \'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=3840\')"></div><div class="wall-item" style="background-image:url(\'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800\')" onclick="setWallpaper(this, \'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=3840\')"></div><div class="wall-item" style="background-image:url(\'https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=800\')" onclick="setWallpaper(this, \'https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=3840\')"></div><div class="wall-item" style="background-image:url(\'https://images.unsplash.com/photo-1462331940025-496de9e46e46?q=80&w=800\')" onclick="setWallpaper(this, \'https://images.unsplash.com/photo-1462331940025-496de9e46e46?q=80&w=3840\')"></div><div class="wall-item" style="background-image:url(\'https://images.unsplash.com/photo-1464802680160-9c7f5d5a4a64?q=80&w=800\')" onclick="setWallpaper(this, \'https://images.unsplash.com/photo-1464802680160-9c7f5d5a4a64?q=80&w=3840\')"></div><div class="wall-item" style="background-image:url(\'https://images.unsplash.com/photo-1506318137071-a8e0661ad6d8?q=80&w=800\')" onclick="setWallpaper(this, \'https://images.unsplash.com/photo-1506318137071-a8e0661ad6d8?q=80&w=3840\')"></div></div></div><div class="settings-section"><div class="settings-title">System</div><div class="settings-row"><span class="settings-label">RGB Mode</span><div class="toggle-switch" id="rgb-toggle" onclick="toggleRGB(this)"></div></div><div class="settings-row"><span class="settings-label">Animations</span><div class="toggle-switch active" onclick="this.classList.toggle(\'active\')"></div></div></div><button class="settings-btn primary" onclick="location.reload()">Reboot System</button></div>';
         } else if(name === 'Notes') {
-            return `<textarea class="notes-area" placeholder="Start typing your notes..."></textarea>`;
+            return '<textarea class="notes-area" placeholder="Start typing your notes..."></textarea>';
         } else if(name === 'Terminal') {
-            return `
-                <div class="terminal" id="terminal">
-                    <div class="terminal-line"><span class="terminal-prompt">astra@os:~$</span> Welcome to ASTRA Terminal v1.0</div>
-                    <div class="terminal-line"><span class="terminal-prompt">astra@os:~$</span> Type 'help' for available commands.</div>
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">astra@os:~$</span>
-                        <input type="text" class="terminal-input" id="terminal-input" onkeydown="handleTerminal(event)" autofocus>
-                    </div>
-                </div>`;
+            return '<div class="terminal" id="terminal"><div class="terminal-line"><span class="terminal-prompt">astra@os:~$</span> Welcome to ASTRA Terminal v1.0</div><div class="terminal-line"><span class="terminal-prompt">astra@os:~$</span> Type \'help\' for available commands.</div><div class="terminal-line"><span class="terminal-prompt">astra@os:~$</span> <input type="text" class="terminal-input" id="terminal-input" onkeydown="handleTerminal(event)" autofocus></div></div>';
         } else if(name === 'Files') {
-            return `
-                <div class="files-grid">
-                    <div class="file-item"><div class="file-icon">📁</div><div class="file-name">Documents</div></div>
-                    <div class="file-item"><div class="file-icon">📁</div><div class="file-name">Downloads</div></div>
-                    <div class="file-item"><div class="file-icon">📁</div><div class="file-name">Pictures</div></div>
-                    <div class="file-item"><div class="file-icon">📁</div><div class="file-name">Music</div></div>
-                    <div class="file-item"><div class="file-icon">📁</div><div class="file-name">Videos</div></div>
-                    <div class="file-item"><div class="file-icon">📄</div><div class="file-name">readme.txt</div></div>
-                    <div class="file-item"><div class="file-icon">🖼️</div><div class="file-name">photo.png</div></div>
-                    <div class="file-item"><div class="file-icon">🎵</div><div class="file-name">music.mp3</div></div>
-                </div>`;
+            return '<div class="files-grid"><div class="file-item"><div class="file-icon">📁</div><div class="file-name">Documents</div></div><div class="file-item"><div class="file-icon">📁</div><div class="file-name">Downloads</div></div><div class="file-item"><div class="file-icon">📁</div><div class="file-name">Pictures</div></div><div class="file-item"><div class="file-icon">📁</div><div class="file-name">Music</div></div><div class="file-item"><div class="file-icon">📁</div><div class="file-name">Videos</div></div><div class="file-item"><div class="file-icon">📄</div><div class="file-name">readme.txt</div></div><div class="file-item"><div class="file-icon">🖼️</div><div class="file-name">photo.png</div></div><div class="file-item"><div class="file-icon">🎵</div><div class="file-name">music.mp3</div></div></div>';
         } else if(name === 'Calculator') {
-            return `
-                <div class="calc-display" id="calc-display">0</div>
-                <div class="calc-buttons">
-                    <button class="calc-btn" onclick="calcInput('C')">C</button>
-                    <button class="calc-btn" onclick="calcInput('±')">±</button>
-                    <button class="calc-btn" onclick="calcInput('%')">%</button>
-                    <button class="calc-btn op" onclick="calcInput('/')">÷</button>
-                    <button class="calc-btn" onclick="calcInput('7')">7</button>
-                    <button class="calc-btn" onclick="calcInput('8')">8</button>
-                    <button class="calc-btn" onclick="calcInput('9')">9</button>
-                    <button class="calc-btn op" onclick="calcInput('*')">×</button>
-                    <button class="calc-btn" onclick="calcInput('4')">4</button>
-                    <button class="calc-btn" onclick="calcInput('5')">5</button>
-                    <button class="calc-btn" onclick="calcInput('6')">6</button>
-                    <button class="calc-btn op" onclick="calcInput('-')">−</button>
-                    <button class="calc-btn" onclick="calcInput('1')">1</button>
-                    <button class="calc-btn" onclick="calcInput('2')">2</button>
-                    <button class="calc-btn" onclick="calcInput('3')">3</button>
-                    <button class="calc-btn op" onclick="calcInput('+')">+</button>
-                    <button class="calc-btn" onclick="calcInput('0')" style="grid-column: span 2;">0</button>
-                    <button class="calc-btn" onclick="calcInput('.')">.</button>
-                    <button class="calc-btn eq" onclick="calcInput('=')">=</button>
-                </div>`;
+            return '<div class="calc-display" id="calc-display">0</div><div class="calc-buttons"><button class="calc-btn" onclick="calcInput(\'C\')">C</button><button class="calc-btn" onclick="calcInput(\'±\')">±</button><button class="calc-btn" onclick="calcInput(\'%\')">%</button><button class="calc-btn op" onclick="calcInput(\'/\')">÷</button><button class="calc-btn" onclick="calcInput(\'7\')">7</button><button class="calc-btn" onclick="calcInput(\'8\')">8</button><button class="calc-btn" onclick="calcInput(\'9\')">9</button><button class="calc-btn op" onclick="calcInput(\'*\')">×</button><button class="calc-btn" onclick="calcInput(\'4\')">4</button><button class="calc-btn" onclick="calcInput(\'5\')">5</button><button class="calc-btn" onclick="calcInput(\'6\')">6</button><button class="calc-btn op" onclick="calcInput(\'-\')">−</button><button class="calc-btn" onclick="calcInput(\'1\')">1</button><button class="calc-btn" onclick="calcInput(\'2\')">2</button><button class="calc-btn" onclick="calcInput(\'3\')">3</button><button class="calc-btn op" onclick="calcInput(\'+\')">+</button><button class="calc-btn" onclick="calcInput(\'0\')" style="grid-column: span 2;">0</button><button class="calc-btn" onclick="calcInput(\'.\')">.</button><button class="calc-btn eq" onclick="calcInput(\'=\')">=</button></div>';
         }
         return '';
     }
 
-    // Window controls
     function minimizeWin(name) {
         const win = document.getElementById('win-'+name);
         if(win) win.style.display = 'none';
@@ -377,7 +276,6 @@
         }
     }
 
-    // Dragging
     let draggedEl = null, offsetX = 0, offsetY = 0;
 
     function startDrag(e, el) {
@@ -402,7 +300,6 @@
         document.removeEventListener('mouseup', stopDrag);
     }
 
-    // Browser functions
     function searchWeb(query, id) {
         const frame = document.getElementById('frame-'+id);
         const home = document.getElementById('home-'+id);
@@ -439,7 +336,6 @@
         if(frame) frame.contentWindow.history.back();
     }
 
-    // Settings functions
     function setWallpaper(el, url) {
         document.body.style.backgroundImage = "url('" + url + "')";
         currentWallpaper = url;
@@ -452,7 +348,6 @@
         document.body.classList.toggle('rgb-active');
     }
 
-    // Terminal functions
     function handleTerminal(e) {
         if(e.key === 'Enter') {
             const input = document.getElementById('terminal-input');
@@ -463,7 +358,7 @@
             if(cmd === 'help') {
                 output = 'Available commands: help, clear, date, whoami, ls, echo [text], neofetch';
             } else if(cmd === 'clear') {
-                terminal.innerHTML = `<div class="terminal-line"><span class="terminal-prompt">astra@os:~$</span> <input type="text" class="terminal-input" id="terminal-input" onkeydown="handleTerminal(event)" autofocus></div>`;
+                terminal.innerHTML = '<div class="terminal-line"><span class="terminal-prompt">astra@os:~$</span> <input type="text" class="terminal-input" id="terminal-input" onkeydown="handleTerminal(event)" autofocus></div>';
                 document.getElementById('terminal-input').focus();
                 return;
             } else if(cmd === 'date') {
@@ -475,21 +370,13 @@
             } else if(cmd.startsWith('echo ')) {
                 output = cmd.substring(5);
             } else if(cmd === 'neofetch') {
-                output = `
-       ★★★★★★★      astra_user@os
-      ★        ★     -----------
-     ★   ASTRA  ★    OS: ASTRA OS v1.0
-     ★    OS    ★    Host: Web Browser
-      ★        ★     Kernel: JavaScript
-       ★★★★★★★      Shell: ASTRA Terminal
-                     Resolution: ${window.innerWidth}x${window.innerHeight}
-                     Theme: Dark Purple`;
+                output = '       ★★★★★★★      astra_user@os\n      ★        ★     -----------\n     ★   ASTRA  ★    OS: ASTRA OS v1.0\n     ★    OS    ★    Host: Web Browser\n      ★        ★     Kernel: JavaScript\n       ★★★★★★★      Shell: ASTRA Terminal';
             } else if(cmd) {
                 output = 'Command not found: ' + cmd;
             }
             
             const inputLine = input.parentElement;
-            inputLine.innerHTML = `<span class="terminal-prompt">astra@os:~$</span> ${cmd}`;
+            inputLine.innerHTML = '<span class="terminal-prompt">astra@os:~$</span> ' + cmd;
             
             if(output) {
                 const outputLine = document.createElement('div');
@@ -501,14 +388,13 @@
             
             const newLine = document.createElement('div');
             newLine.className = 'terminal-line';
-            newLine.innerHTML = `<span class="terminal-prompt">astra@os:~$</span> <input type="text" class="terminal-input" id="terminal-input" onkeydown="handleTerminal(event)" autofocus>`;
+            newLine.innerHTML = '<span class="terminal-prompt">astra@os:~$</span> <input type="text" class="terminal-input" id="terminal-input" onkeydown="handleTerminal(event)" autofocus>';
             terminal.appendChild(newLine);
             document.getElementById('terminal-input').focus();
             terminal.scrollTop = terminal.scrollHeight;
         }
     }
 
-    // Calculator functions
     function calcInput(val) {
         const display = document.getElementById('calc-display');
         if(val === 'C') {
@@ -532,7 +418,6 @@
         display.textContent = calcDisplay;
     }
 
-    // Clock
     setInterval(() => {
         document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
     }, 1000);
